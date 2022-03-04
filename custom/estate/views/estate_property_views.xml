@@ -49,20 +49,6 @@
                         </group>
                         <newline/>
                         <notebook>
-                            <page string="Additional">
-                                <group>
-                                    <field name="living_area"/>
-                                </group>
-                                <group>
-                                    <field name="facades"/>
-                                </group>
-                                <group>
-                                    <field name="garage"/>
-                                </group>
-                                <group>
-                                    <field name="garden"/>
-                                </group>
-                            </page>
                             <page string="Description">
                                 <group>
                                     <field name="description"/>
@@ -75,6 +61,23 @@
                                 </group>
                                 <group>
                                     <field name="garden_orientation"/>
+                                </group>
+                                                                <group>
+                                    <field name="living_area"/>
+                                </group>
+                                <group>
+                                    <field name="facades"/>
+                                </group>
+                                <group>
+                                    <field name="garage"/>
+                                </group>
+                                <group>
+                                    <field name="garden"/>
+                                </group>
+                            </page>
+                            <page string="Additional">
+                                <group>
+                                    <field name="property_type_id"/>
                                 </group>
                             </page>
                         </notebook>

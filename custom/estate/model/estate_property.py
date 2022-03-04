@@ -28,6 +28,7 @@ class EstateProperty(models.Model):
         selection=[('New', 'New'), ('Offer', 'Offer'), ('Received', 'Received'), ('Offer', 'Offer'), ('Accepted', 'Accepted'), ('Sold', 'Sold'), ('Canceled', 'Canceled')],
         default='New'
     )
+    property_type_id = fields.Many2one('estate.property.type', string='Property Type')
     # _sql_constraints = [
     #     ('check_number_of_months', 'CHECK(number_of_months >= 0)', 'The number of month can\'t be negative.'),
     # ]
