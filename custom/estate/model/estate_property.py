@@ -1,4 +1,4 @@
-from odoo import models, fields
+from odoo import models, fields, api
 
 
 class EstateProperty(models.Model):
@@ -18,6 +18,7 @@ class EstateProperty(models.Model):
     garage = fields.Boolean('Garage', default=True)
     garden = fields.Boolean('Garden', default=True)
     garden_area = fields.Integer('Garden Area')
+    total_area = fields.Integer('Total Area', compute='_compute_total_area')
     garden_orientation = fields.Selection(
         string='Orientation',
         selection=[('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')],
@@ -33,6 +34,8 @@ class EstateProperty(models.Model):
     sales_person_id = fields.Many2one('res.users', string='Sales Person', default=lambda self: self.env.user)
     tag_ids = fields.Many2many('estate.property.tag', string='Tags')
     offer_ids = fields.One2many('estate.property.offer', 'property_id', string='Offer')
-    # _sql_constraints = [
-    #     ('check_number_of_months', 'CHECK(number_of_months >= 0)', 'The number of month can\'t be negative.'),
-    # ]
+
+    @api.depends("living_area", "garden_area")
+    def _compute_total_area(self):
+        for records in self:
+            records.total_area = records.living_area + records.garden_area

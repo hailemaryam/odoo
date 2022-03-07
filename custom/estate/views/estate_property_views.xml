@@ -43,7 +43,7 @@
                             <field name="postcode"/>
                         </group>
                         <group>
-                            <field name="date_availability"/>
+                            <field name="total_area"/>
                         </group>
                         <group>
                             <field name="expected_price"/>
@@ -66,7 +66,7 @@
                                 <group>
                                     <field name="garden_orientation"/>
                                 </group>
-                                                                <group>
+                                <group>
                                     <field name="living_area"/>
                                 </group>
                                 <group>
