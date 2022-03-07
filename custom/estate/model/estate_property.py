@@ -19,6 +19,7 @@ class EstateProperty(models.Model):
     garden = fields.Boolean('Garden', default=True)
     garden_area = fields.Integer('Garden Area')
     total_area = fields.Integer('Total Area', compute='_compute_total_area')
+    best_price = fields.Float('Best Price', compute='_compute_best_price')
     garden_orientation = fields.Selection(
         string='Orientation',
         selection=[('north', 'North'), ('south', 'South'), ('east', 'East'), ('west', 'West')],
@@ -26,7 +27,8 @@ class EstateProperty(models.Model):
     )
     active = fields.Boolean(default=True)
     state = fields.Selection(
-        selection=[('New', 'New'), ('Offer', 'Offer'), ('Received', 'Received'), ('Offer', 'Offer'), ('Accepted', 'Accepted'), ('Sold', 'Sold'), ('Canceled', 'Canceled')],
+        selection=[('New', 'New'), ('Offer', 'Offer'), ('Received', 'Received'), ('Offer', 'Offer'),
+                   ('Accepted', 'Accepted'), ('Sold', 'Sold'), ('Canceled', 'Canceled')],
         default='New'
     )
     property_type_id = fields.Many2one('estate.property.type', string='Property Type')
@@ -39,3 +41,12 @@ class EstateProperty(models.Model):
     def _compute_total_area(self):
         for records in self:
             records.total_area = records.living_area + records.garden_area
+
+    @api.depends("offer_ids.price")
+    def _compute_best_price(self):
+        for record in self:
+            max_amount_current = 0
+            for line in record.offer_ids:
+                if max_amount_current < line.price:
+                    max_amount_current = line.price
+            record.best_price = max_amount_current
