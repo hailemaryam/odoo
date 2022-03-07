@@ -29,6 +29,8 @@ class EstateProperty(models.Model):
         default='New'
     )
     property_type_id = fields.Many2one('estate.property.type', string='Property Type')
+    buyer_id = fields.Many2one('res.partner', string='Buyer', copy=False)
+    sales_person_id = fields.Many2one('res.users', string='Sales Person', default=lambda self: self.env.user)
     # _sql_constraints = [
     #     ('check_number_of_months', 'CHECK(number_of_months >= 0)', 'The number of month can\'t be negative.'),
     # ]
