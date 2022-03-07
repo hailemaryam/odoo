@@ -86,6 +86,9 @@
                                     <field name="sales_person_id"/>
                                 </group>
                             </page>
+                            <page string="Offers">
+                                <field name="offer_ids"/>
+                            </page>
                         </notebook>
                     </group>
                 </sheet>
