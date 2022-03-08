@@ -57,7 +57,7 @@ class EstateProperty(models.Model):
         for record in self:
             max_amount_current = 0
             for line in record.offer_ids:
-                if max_amount_current < line.price:
+                if (max_amount_current < line.price) & (line.status == 'Accepted'):
                     max_amount_current = line.price
             record.best_price = max_amount_current
 
