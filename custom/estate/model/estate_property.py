@@ -66,6 +66,7 @@ class EstateProperty(models.Model):
             record.best_price = max_amount_current
             self.buyer_id = buyer_id
             self.selling_price = selling_price
+
     def sold(self):
         if self.state != 'Canceled':
             self.state = 'Sold'
