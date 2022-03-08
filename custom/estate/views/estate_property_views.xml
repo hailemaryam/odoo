@@ -31,6 +31,10 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <form string="Property">
+                <header>
+                    <button name="sold" type="object" string="Sold" icon="fa-check"/>
+                    <button name="cancel" type="object" string="Cancel" icon="fa-times"/>
+                </header>
                 <sheet>
                     <h1>
                         <field name="name"/>
@@ -40,7 +44,7 @@
                     </p>
                     <group>
                         <group>
-                            <field name="postcode"/>
+                            <field name="state"/>
                         </group>
                         <group>
                             <field name="total_area"/>

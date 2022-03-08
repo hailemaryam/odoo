@@ -1,4 +1,5 @@
 from odoo import models, fields, api
+from odoo.exceptions import UserError
 
 
 class EstateProperty(models.Model):
@@ -59,3 +60,17 @@ class EstateProperty(models.Model):
                 if max_amount_current < line.price:
                     max_amount_current = line.price
             record.best_price = max_amount_current
+
+    def sold(self):
+        if self.state != 'Canceled':
+            self.state = 'Sold'
+        else:
+            raise UserError('Cancelled item can not be sold.')
+        return True
+
+    def cancel(self):
+        if self.state != 'Sold':
+            self.state = 'Canceled'
+        else:
+            raise UserError('Sold item can not be cancelled.')
+        return True
