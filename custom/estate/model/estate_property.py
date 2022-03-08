@@ -55,12 +55,17 @@ class EstateProperty(models.Model):
     @api.depends("offer_ids.price")
     def _compute_best_price(self):
         for record in self:
+            buyer_id = self.buyer_id
+            selling_price = self.selling_price
             max_amount_current = 0
             for line in record.offer_ids:
                 if (max_amount_current < line.price) & (line.status == 'Accepted'):
                     max_amount_current = line.price
+                    buyer_id = line.partner_id
+                    selling_price = max_amount_current
             record.best_price = max_amount_current
-
+            self.buyer_id = buyer_id
+            self.selling_price = selling_price
     def sold(self):
         if self.state != 'Canceled':
             self.state = 'Sold'
