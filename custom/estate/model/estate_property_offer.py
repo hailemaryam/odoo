@@ -14,7 +14,7 @@ class EstatePropertyOffer(models.Model):
     validity = fields.Integer('Validity')
     date_deadline = fields.Date('Dead Line', compute='_compute_date_deadline', inverse='_inverse_date_deadline')
     partner_id = fields.Many2one('res.partner', string='Buyer', required=True)
-    property_id = fields.Many2one('estate.property', string="Property", required=True)
+    property_id = fields.Many2one('estate.property', string="Property", required=True, ondelete='cascade')
     _sql_constraints = [
         ('positive_price', 'CHECK(price > 0)', 'the price can only have positive value.')
     ]

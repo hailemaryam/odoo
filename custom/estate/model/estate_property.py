@@ -1,5 +1,6 @@
 from odoo import models, fields, api
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
+from odoo.tools import float_compare
 
 
 class EstateProperty(models.Model):
@@ -41,6 +42,12 @@ class EstateProperty(models.Model):
         ('positive_expected_price', 'CHECK(expected_price >= 0)', 'the price should only have positive value.'),
         ('positive_selling_price', 'CHECK(selling_price >= 0)', 'the price should only have positive value.')
     ]
+
+    @api.constrains('expected_price', 'selling_price')
+    def _check_percentage(self):
+        if self.expected_price > 0:
+            if (self.selling_price != 0) & (float_compare(0.90, self.selling_price/self.expected_price, 2) > 0):
+                raise ValidationError('selling price should be greater than 90 percent of the expected price.')
 
     @api.onchange('garden')
     def _onchange_garden(self):
