@@ -37,6 +37,10 @@ class EstateProperty(models.Model):
     sales_person_id = fields.Many2one('res.users', string='Sales Person', default=lambda self: self.env.user)
     tag_ids = fields.Many2many('estate.property.tag', string='Tags')
     offer_ids = fields.One2many('estate.property.offer', 'property_id', string='Offer')
+    _sql_constraints = [
+        ('positive_expected_price', 'CHECK(expected_price >= 0)', 'the price should only have positive value.'),
+        ('positive_selling_price', 'CHECK(selling_price >= 0)', 'the price should only have positive value.')
+    ]
 
     @api.onchange('garden')
     def _onchange_garden(self):
