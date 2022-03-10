@@ -86,7 +86,7 @@
                             </page>
                             <page string="Additional">
                                 <group>
-                                    <field name="property_type_id"/>
+                                    <field name="property_type_id" options="{'no_create': True, 'no_open': True}"/>
                                     <field name="buyer_id"/>
                                     <field name="sales_person_id"/>
                                 </group>
