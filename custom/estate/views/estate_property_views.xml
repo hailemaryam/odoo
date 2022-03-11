@@ -32,8 +32,8 @@
         <field name="arch" type="xml">
             <form string="Property">
                 <header>
-                    <button name="sold" class="oe_highlight" type="object" string="Sold" icon="fa-check"/>
-                    <button name="cancel" class="oe_highlight" type="object" string="Cancel" icon="fa-times"/>
+                    <button name="sold" class="oe_highlight" states="New" type="object" string="Sold" icon="fa-check"/>
+                    <button name="cancel" class="oe_highlight" states="New" type="object" string="Cancel" icon="fa-times"/>
                     <field name="state" widget="statusbar" statusbar_visible="New,Offer,Received,Offer,Accepted,Sold,Canceled"/>
                 </header>
                 <sheet>
