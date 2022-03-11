@@ -32,9 +32,9 @@
         <field name="arch" type="xml">
             <form string="Property">
                 <header>
-                    <button name="sold" class="oe_highlight" states="New" type="object" string="Sold" icon="fa-check"/>
-                    <button name="cancel" class="oe_highlight" states="New" type="object" string="Cancel" icon="fa-times"/>
-                    <field name="state" widget="statusbar" statusbar_visible="New,Offer,Received,Offer,Accepted,Sold,Canceled"/>
+                    <button name="sold" class="oe_highlight" states="New,OfferR,OfferA" type="object" string="Sold" icon="fa-check"/>
+                    <button name="cancel" class="oe_highlight" states="New,OfferR,OfferA" type="object" string="Cancel" icon="fa-times"/>
+                    <field name="state" widget="statusbar" statusbar_visible="New,OfferR,OfferA,Sold,Canceled"/>
                 </header>
                 <sheet>
                     <h1>
@@ -92,7 +92,7 @@
                                 </group>
                             </page>
                             <page string="Offers">
-                                <field name="offer_ids"/>
+                                <field name="offer_ids" attrs="{'readonly': ['|', '|', ('state', '=', 'OfferA'), ('state', '=', 'Canceled'), ('state', '=', 'Sold')]}"/>
                             </page>
                         </notebook>
                     </group>

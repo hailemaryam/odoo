@@ -29,8 +29,7 @@ class EstateProperty(models.Model):
     )
     active = fields.Boolean(default=True)
     state = fields.Selection(
-        selection=[('New', 'New'), ('Offer', 'Offer'), ('Received', 'Received'), ('Offer', 'Offer'),
-                   ('Accepted', 'Accepted'), ('Sold', 'Sold'), ('Canceled', 'Canceled')],
+        selection=[('New', 'New'), ('OfferR', 'Offer Received'), ('OfferA', 'Offer Accepted'), ('Sold', 'Sold'), ('Canceled', 'Canceled')],
         default='New'
     )
     property_type_id = fields.Many2one('estate.property.type', string='Property Type')
@@ -48,6 +47,11 @@ class EstateProperty(models.Model):
         if self.expected_price > 0:
             if (self.selling_price != 0) & (float_compare(0.90, self.selling_price/self.expected_price, 2) > 0):
                 raise ValidationError('selling price should be greater than 90 percent of the expected price.')
+
+    @api.onchange('offer_ids')
+    def _onchange_offer(self):
+        if len(self.offer_ids) > 0:
+            self.state = 'OfferR'
 
     @api.onchange('garden')
     def _onchange_garden(self):
