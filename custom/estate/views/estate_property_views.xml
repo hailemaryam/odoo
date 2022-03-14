@@ -117,6 +117,7 @@
             <search string="Property">
                 <field name="name"/>
                 <field name="postcode"/>
+                <field name="living_area" string="Living Area" filter_domain="[('living_area', '>=', self)]" />
                 <separator/>
                 <filter string="Available" name="available" domain="[('state', '=', 'New')]"/>
                 <group expand="1" string="Group By">
