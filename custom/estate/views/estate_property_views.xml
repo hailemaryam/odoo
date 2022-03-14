@@ -70,6 +70,9 @@
                         <notebook>
                             <page string="Description">
                                 <group>
+                                    <field name="property_type_id"/>
+                                </group>
+                                <group>
                                     <field name="description"/>
                                 </group>
                                 <group>
