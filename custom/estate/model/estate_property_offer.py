@@ -16,9 +16,15 @@ class EstatePropertyOffer(models.Model):
     date_deadline = fields.Date('Dead Line', compute='_compute_date_deadline', inverse='_inverse_date_deadline')
     partner_id = fields.Many2one('res.partner', string='Buyer', required=True)
     property_id = fields.Many2one('estate.property', string="Property", required=True, ondelete='cascade')
+    property_type_id = fields.Many2one('estate.property.type', compute='_compute_property_type_id', string="PropertyType", store=True)
     _sql_constraints = [
         ('positive_price', 'CHECK(price > 0)', 'the price can only have positive value.')
     ]
+
+    @api.depends('property_id')
+    def _compute_property_type_id(self):
+        for record in self:
+            record.property_type_id = record.property_id.property_type_id
 
     @api.depends('validity')
     def _compute_date_deadline(self):

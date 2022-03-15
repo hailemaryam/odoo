@@ -1,4 +1,19 @@
 <odoo>
+    <record id="estate_property_offer_model_action" model="ir.actions.act_window">
+        <field name="name">Estate Property Offer</field>
+        <field name="res_model">estate.property.offer</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Define a new lost reason
+          </p><p>
+            Use lost reasons to explain why an opportunity is lost.
+          </p><p>
+            Some examples of lost reasons: "We don't have people/skill", "Price too high"
+          </p>
+        </field>
+    </record>
+
     <record id="estate_property_offer_list_tree" model="ir.ui.view">
         <field name="name">estate.property.offer.tree</field>
         <field name="model">estate.property.offer</field>
@@ -7,6 +22,7 @@
                   editable="bottom"
                   decoration-danger="status=='Refused'"
                   decoration-success="status=='Accepted'">
+                <field name="property_type_id"/>
                 <field name="price"/>
                 <field name="status"/>
                 <field name="partner_id"/>
