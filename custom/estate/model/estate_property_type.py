@@ -1,4 +1,4 @@
-from odoo import models, fields,api
+from odoo import models, fields, api
 
 
 class EstatePropertyType(models.Model):
@@ -20,3 +20,14 @@ class EstatePropertyType(models.Model):
     def _compute_count(self):
         for record in self:
             self.offer_count = len(self.offer_ids)
+
+    def action_open_offer(self):
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Estate Property Offer',
+            'res_model': 'estate.property.offer',
+            # 'view_type': 'tree',
+            'domain': [('property_type_id', '=', self.id)],
+            'view_mode': 'tree,form',
+            'target': 'current',
+        }
