@@ -1,4 +1,21 @@
 <odoo>
+    <record id="estate_property_view_search" model="ir.ui.view">
+        <field name="name">estate.property.view.search</field>
+        <field name="model">estate.property</field>
+        <field name="arch" type="xml">
+            <search string="Property">
+                <field name="name"/>
+                <field name="postcode"/>
+                <field name="living_area" string="Living Area" filter_domain="[('living_area', '>=', self)]" />
+                <separator/>
+                <filter string="Available" name="available" domain="[('state', '=', 'New')]"/>
+                <group expand="1" string="Group By">
+                    <filter string="State" name="state" context="{'group_by':'state', 'residual_visible':True}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <record id="estate_property_model_action" model="ir.actions.act_window">
         <field name="name">Estate Property</field>
         <field name="res_model">estate.property</field>
@@ -111,22 +128,6 @@
                     </group>
                 </sheet>
             </form>
-        </field>
-    </record>
-    <record id="estate_property_view_search" model="ir.ui.view">
-        <field name="name">estate.property.view.search</field>
-        <field name="model">estate.property</field>
-        <field name="arch" type="xml">
-            <search string="Property">
-                <field name="name"/>
-                <field name="postcode"/>
-                <field name="living_area" string="Living Area" filter_domain="[('living_area', '>=', self)]" />
-                <separator/>
-                <filter string="Available" name="available" domain="[('state', '=', 'New')]"/>
-                <group expand="1" string="Group By">
-                    <filter string="State" name="state" context="{'group_by':'state', 'residual_visible':True}"/>
-                </group>
-            </search>
         </field>
     </record>
 </odoo>
